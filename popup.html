@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doubao Source Collector</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>来源收集器</h1>
+      <p id="status">正在读取本地记录...</p>
+      <div class="actions">
+        <button id="captureBtn">当前页抓取</button>
+        <button id="exportCsvBtn">导出CSV</button>
+        <button id="exportMdBtn">导出Markdown</button>
+        <button id="exportJsonBtn">导出JSON</button>
+        <button id="clearBtn">清空</button>
+      </div>
+      <pre id="preview"></pre>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

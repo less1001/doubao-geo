@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Doubao Source Collector",
+  "version": "0.1.0",
+  "description": "Collect source links shown in Doubao answers and save them locally.",
+  "permissions": ["storage", "downloads", "activeTab", "tabs", "debugger"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Doubao Source Collector",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}

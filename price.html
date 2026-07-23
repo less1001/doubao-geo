@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEO品牌可见度优化方案</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans SC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        geo: {
+                            bg: '#080C14',
+                            card: '#0F1626',
+                            cardBorder: '#1E293B',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#AA7C11',
+                            goldGlow: 'rgba(212, 175, 55, 0.25)',
+                            textMuted: '#94A3B8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f7f4ee;
+            color: #1c1917;
+            font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Gold Gradient Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF1C5 0%, #E6C15A 50%, #B88A22 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header Title Main Gradient */
+        .main-title-gradient {
+            background: linear-gradient(180deg, #2f241d 0%, #5a4636 45%, #a4551b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Metallic Gold Border */
+        .gold-border {
+            border: 1.5px solid;
+            border-image: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #8A6112 100%) 1;
+        }
+
+        /* Highlight Featured Package Border */
+        .featured-card-border {
+            border: 2px solid rgba(212, 136, 58, 0.35);
+            box-shadow: 0 12px 30px rgba(92, 63, 37, 0.08), inset 0 0 15px rgba(212, 136, 58, 0.06);
+        }
+
+        .standard-card-border {
+            border: 1px solid rgba(212, 136, 58, 0.15);
+        }
+
+        /* Card Background Glow */
+        .card-bg {
+            background: linear-gradient(180deg, rgba(255, 251, 245, 0.98) 0%, rgba(248, 243, 236, 0.98) 100%);
+            backdrop-filter: blur(12px);
+        }
+
+        .gold-badge-bg {
+            background: linear-gradient(135deg, #f5c26b 0%, #de8c45 100%);
+            color: #2f241d;
+        }
+
+        /* Button Gold Gradient */
+        .gold-btn {
+            background: linear-gradient(135deg, #f2c67a 0%, #dc8a45 100%);
+            box-shadow: 0 6px 18px rgba(212, 136, 58, 0.18);
+            transition: all 0.3s ease;
+        }
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #f7cf88 0%, #e39652 100%);
+            box-shadow: 0 8px 20px rgba(212, 136, 58, 0.24);
+            transform: translateY(-1px);
+        }
+
+        /* Background grid overlay */
+        .bg-grid-pattern {
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .mobile-card-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                font-size: 15px;
+            }
+
+            .bg-grid-pattern {
+                background-size: 100% 100%, 22px 22px, 22px 22px;
+            }
+
+            main {
+                border-radius: 1.25rem;
+            }
+
+            .mobile-card-stack,
+            .mobile-stack-2,
+            .mobile-stack-4 {
+                grid-template-columns: 1fr !important;
+            }
+
+            .mobile-stack-2 {
+                gap: 0.75rem;
+            }
+
+            .mobile-stack-4 {
+                gap: 0.75rem;
+            }
+
+            .mobile-center {
+                text-align: center;
+            }
+
+            .mobile-center > div,
+            .mobile-center > li {
+                justify-content: center;
+            }
+
+            .mobile-tight {
+                line-height: 1.35;
+            }
+
+            .mobile-fix-modal {
+                align-items: flex-end;
+                padding: 0.75rem;
+            }
+
+            .mobile-fix-modal > div {
+                max-height: calc(100vh - 1.5rem);
+                overflow-y: auto;
+                width: 100%;
+                border-radius: 1.25rem 1.25rem 0.75rem 0.75rem;
+            }
+
+            .mobile-toast {
+                left: 50%;
+                right: auto;
+                bottom: 1rem;
+                transform: translateX(-50%) translateY(5rem);
+                max-width: calc(100vw - 1.5rem);
+                width: fit-content;
+            }
+        }
+
+        /* Print optimization */
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: #080C14 !important; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-grid-pattern py-4 sm:py-8 px-2 sm:px-6 md:px-8 text-stone-900 flex flex-col items-center">
+
+    <!-- Main Container Replicating the Poster Frame -->
+        <main class="w-full max-w-[1200px] bg-[#fbf8f3] border border-stone-200 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden">
+
+        <!-- Top Lighting Effect -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-orange-100 blur-[80px] pointer-events-none rounded-full"></div>
+
+        <!-- HEADER SECTION -->
+        <header class="text-center relative z-10 mb-8 sm:mb-14">
+            <!-- Main Title -->
+            <h1 class="main-title-gradient text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] mb-3">
+                GEO品牌可见度优化方案
+            </h1>
+            <!-- Subtitle -->
+            <p class="text-orange-700/90 text-sm sm:text-xl md:text-2xl font-bold tracking-wider sm:tracking-widest mt-2">
+                让品牌被AI优先引用和推荐
+            </p>
+
+            <!-- Decorative Divider Line -->
+            <div class="flex items-center justify-center my-5 sm:my-8 opacity-70">
+                <div class="h-[1.5px] w-20 sm:w-32 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+                <div class="mx-2 sm:mx-4 text-orange-600 text-xs sm:text-sm">◆</div>
+                <div class="h-[1.5px] w-20 sm:w-32 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+            </div>
+
+            <!-- Top 4 Highlights Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 max-w-6xl mx-auto text-left">
+                <div class="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-orange-200">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-microchip text-orange-600 text-sm sm:text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm sm:text-base font-bold text-orange-700">AI可见度提升</div>
+                        <div class="text-xs sm:text-sm text-stone-500 leading-tight">抢占AI搜索入口</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-orange-200">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-chart-line text-orange-600 text-sm sm:text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm sm:text-base font-bold text-orange-700">结果导向</div>
+                        <div class="text-xs sm:text-sm text-stone-500 leading-tight">可监测 · 可迭代 · 可验证</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-orange-200">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-sliders text-orange-600 text-sm sm:text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm sm:text-base font-bold text-orange-700">全案托管</div>
+                        <div class="text-xs sm:text-sm text-stone-500 leading-tight">策略 · 内容 · 执行 · 监测</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- THREE PACKAGES SECTION -->
+        <section class="mobile-card-stack md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16 items-stretch">
+            
+            <!-- PACKAGE 1: 基础诊断包 -->
+            <div class="card-bg rounded-2xl p-5 sm:p-7 standard-card-border flex flex-col justify-between relative hover:border-orange-300 transition duration-300 shadow-lg min-h-full">
+                <div>
+                    <!-- Package Title Header -->
+                    <div class="text-center pb-5 mb-5 border-b border-stone-200">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-1.5">可见度诊断包</h3>
+                        <p class="text-xs sm:text-sm font-medium text-stone-500 mb-4">找问题 · 定方向 · 先验证</p>
+                        
+                        <!-- Price -->
+                        <div class="flex items-baseline justify-center gap-1.5 my-2">
+                            <span class="text-orange-600 font-bold text-xl sm:text-2xl">¥</span>
+                            <span class="text-4xl sm:text-5xl font-black text-orange-600 tracking-tight drop-shadow-md">19800</span>
+                        </div>
+                        
+                        <!-- Duration Badge -->
+                        <div class="inline-block px-5 py-1 rounded-full text-xs sm:text-sm font-semibold border border-stone-300 bg-white/85 text-stone-800 mt-2">
+                            30天
+                        </div>
+                    </div>
+
+                    <!-- Package Features List -->
+                    <div class="space-y-3.5 sm:space-y-4 mb-8">
+                        <div class="text-xs sm:text-sm text-orange-600/90 font-bold tracking-wider uppercase mb-3">核心交付</div>
+
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-compass text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>5–6款主流AI模型诊断</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-vial text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>20个核心问题测试</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-file-shield text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>品牌认知漏洞分析报告</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-sitemap text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>品牌知识资产重构</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-newspaper text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>10篇AI友好内容资产</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-clipboard-list text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>1份诊断报告+执行建议</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage Footer Badge -->
+                <div class="mt-auto pt-2">
+                    <div class="w-full py-3 px-4 rounded-xl bg-white border border-stone-200 text-center">
+                        <div class="text-xs text-orange-600/90 font-semibold mb-0.5">适合阶段</div>
+                        <div class="text-sm sm:text-base font-bold text-stone-900">验证价值 / 找到AI盲区</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PACKAGE 2: GEO 增长运营包 (RECOMMENDED) -->
+            <div class="card-bg rounded-2xl p-5 sm:p-7 featured-card-border flex flex-col justify-between relative transform md:-translate-y-3 shadow-2xl bg-gradient-to-b from-[#fffaf4] to-[#f4eadf] my-3 md:my-0 min-h-full">
+                
+                <!-- Recommended Tag -->
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span class="gold-badge-bg font-black text-xs sm:text-sm px-5 py-1.5 rounded-full border border-amber-200 shadow-xl uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-xs"></i> 主推方案
+                    </span>
+                </div>
+
+                <div>
+                    <!-- Package Title Header -->
+                    <div class="text-center pb-5 mb-5 border-b border-orange-200 pt-3">
+                        <h3 class="text-2xl sm:text-3xl font-black text-orange-600 mb-1.5">AI可见度增长包</h3>
+                        <p class="text-xs sm:text-sm font-semibold text-orange-700/80 mb-4">系统优化 · 持续增长</p>
+                        
+                        <!-- Price -->
+                        <div class="flex items-baseline justify-center gap-1.5 my-2">
+                            <span class="text-orange-600 font-bold text-xl sm:text-2xl">¥</span>
+                            <span class="text-4xl sm:text-6xl font-black text-orange-600 tracking-tight drop-shadow-[0_4px_15px_rgba(212,175,55,0.5)]">58000</span>
+                        </div>
+                        
+                        <!-- Duration Badge -->
+                        <div class="inline-block px-5 py-1 rounded-full text-xs sm:text-sm font-bold bg-orange-100 text-orange-600 border border-orange-300 mt-2">
+                            90天
+                        </div>
+                    </div>
+
+                    <!-- Package Features List -->
+                    <div class="space-y-3.5 sm:space-y-4 mb-8">
+                        <div class="text-xs sm:text-sm text-orange-600 font-bold tracking-wider uppercase mb-3 flex flex-wrap items-center gap-1.5">
+                            <span>核心交付</span>
+                            <span class="text-xs text-stone-600 font-normal">(含可见度诊断包全部内容)</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-circle-check text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>30–50个高价值问题覆盖</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-pen-nib text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>30–60篇深度内容生产</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-network-wired text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>20–30个高权重渠道布局</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-chart-pie text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>每月AI模型复测与效果报告</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-magnifying-glass-chart text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>竞品监测与策略优化</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-semibold text-stone-900 leading-snug">
+                            <i class="fa-solid fa-calendar-check text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>季度复盘与下一阶段规划</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage Footer Badge -->
+                <div class="mt-auto pt-2">
+                    <div class="w-full py-3 px-4 rounded-xl gold-btn text-center text-slate-950 font-bold shadow-xl">
+                        <div class="text-xs opacity-90 mb-0.5 uppercase tracking-wider font-bold">适合阶段</div>
+                        <div class="text-sm sm:text-base font-black">系统增长 / 拦截竞品流量</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PACKAGE 3: 年度战略包 -->
+            <div class="card-bg rounded-2xl p-5 sm:p-7 standard-card-border flex flex-col justify-between relative hover:border-orange-300 transition duration-300 shadow-lg min-h-full">
+                <div>
+                    <!-- Package Title Header -->
+                    <div class="text-center pb-5 mb-5 border-b border-stone-200">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-1.5">品牌占位包</h3>
+                        <p class="text-xs sm:text-sm font-medium text-stone-500 mb-4">长期占位 · 护城河构建</p>
+                        
+                        <!-- Price -->
+                        <div class="flex items-baseline justify-center gap-1.5 my-2">
+                            <span class="text-orange-600 font-bold text-xl sm:text-2xl">¥</span>
+                            <span class="text-4xl sm:text-5xl font-black text-orange-600 tracking-tight drop-shadow-md">180000</span>
+                        </div>
+                        
+                        <!-- Duration Badge -->
+                        <div class="inline-block px-5 py-1 rounded-full text-xs sm:text-sm font-semibold border border-stone-300 bg-white/85 text-stone-800 mt-2">
+                            12个月
+                        </div>
+                    </div>
+
+                    <!-- Package Features List -->
+                    <div class="space-y-3.5 sm:space-y-4 mb-8">
+                        <div class="text-xs sm:text-sm text-orange-600/90 font-bold tracking-wider uppercase mb-3 flex flex-wrap items-center gap-1.5">
+                            <span>核心交付</span>
+                            <span class="text-xs text-stone-500 font-normal">(含AI可见度增长包全部内容)</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-key text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>200+关键词覆盖与优化</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-cubes text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>300+篇内容资产建议</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-shield-halved text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>全网权威渠道持续布局</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-bell text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>7×24负面监控与预警</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-bullhorn text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>重大活动节点营销支持</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                            <i class="fa-solid fa-bullseye text-orange-600 shrink-0 text-base sm:text-lg"></i>
+                            <span>年度KPI协议与目标管理</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage Footer Badge -->
+                <div class="mt-auto pt-2">
+                    <div class="w-full py-3 px-4 rounded-xl bg-white border border-stone-200 text-center">
+                        <div class="text-xs text-orange-600/90 font-semibold mb-0.5">适合阶段</div>
+                        <div class="text-sm sm:text-base font-bold text-stone-900">长期占位 / 建立AI品牌护城河</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SERVICE PROCESS SECTION (服务流程) -->
+        <section class="mb-10 sm:mb-16 bg-white/90 border border-orange-200 rounded-2xl p-5 sm:p-9 backdrop-blur-md">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-center text-orange-700 tracking-wide mb-8 sm:mb-10 flex items-center justify-center gap-3">
+                <span class="w-8 sm:w-12 h-[2px] bg-orange-600/60"></span>
+                <span>服务流程</span>
+                <span class="w-8 sm:w-12 h-[2px] bg-orange-600/60"></span>
+            </h2>
+
+            <!-- Process Steps Grid -->
+            <div class="mobile-stack-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 relative">
+                
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-file-contract text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">01</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">01 签约启动</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>明确目标</div>
+                        <div>梳理资料</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-magnifying-glass-chart text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">02</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">02 AI诊断</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>多模型测试</div>
+                        <div>竞品分析</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-brain text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">03</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">03 知识资产建设</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>品牌资料重构</div>
+                        <div>内容策略制定</div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-layer-group text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">04</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">04 内容生产与布局</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>建立答案供给</div>
+                        <div>全网渠道布局</div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-chart-column text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">05</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">05 AI效果监测</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>多模型复测</div>
+                        <div>可见度追踪</div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="flex flex-col items-center text-center group p-3 rounded-xl bg-white/90 sm:bg-white/30 border border-stone-200 sm:border-transparent mobile-tight">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-orange-600/50 bg-white flex items-center justify-center mb-3 group-hover:border-orange-600 transition shadow-lg relative">
+                        <i class="fa-solid fa-arrows-spin text-orange-600 text-lg sm:text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-orange-600 text-slate-950 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">06</span>
+                    </div>
+                    <div class="text-sm sm:text-base font-bold text-stone-900 mb-1">06 优化迭代</div>
+                    <div class="text-xs sm:text-sm text-stone-500 leading-tight space-y-0.5">
+                        <div>策略优化</div>
+                        <div>持续提升</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PAYMENT & TERMS SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 mb-10 sm:mb-12">
+            
+            <!-- Left Box: 付款方式 -->
+            <div class="bg-white/92 border border-stone-200 rounded-xl p-5 sm:p-7 backdrop-blur-sm">
+                <h3 class="text-base sm:text-lg font-extrabold text-orange-700 mb-4 flex items-center gap-2.5 border-b border-stone-200 pb-3">
+                    <i class="fa-solid fa-credit-card text-orange-600 text-base sm:text-xl"></i>
+                    <span>付款方式</span>
+                </h3>
+                <div class="space-y-3.5 text-sm sm:text-base text-stone-600">
+                    <div class="rounded-xl border border-stone-200 bg-stone-50/70 p-4">
+                        <div class="font-bold text-stone-900 mb-1">可见度诊断包</div>
+                        <div class="text-stone-600">100%首付款</div>
+                    </div>
+                    
+                    <div class="rounded-xl border border-stone-200 bg-stone-50/70 p-4">
+                        <div class="font-bold text-stone-900 mb-2">AI可见度增长包</div>
+                        <div class="grid grid-cols-3 gap-2 text-xs sm:text-sm text-stone-600">
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">50%首付款</div>
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">30%中期款</div>
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">20%尾款</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-stone-200 bg-stone-50/70 p-4">
+                        <div class="font-bold text-stone-900 mb-2">品牌占位包</div>
+                        <div class="grid grid-cols-3 gap-2 text-xs sm:text-sm text-stone-600">
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">40%首付款</div>
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">30%季度款</div>
+                            <div class="rounded-lg bg-white border border-stone-200 px-3 py-2 text-center">30%尾款</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Box: 说明与约定 -->
+            <div class="bg-white/92 border border-stone-200 rounded-xl p-5 sm:p-7 backdrop-blur-sm">
+                <h3 class="text-base sm:text-lg font-extrabold text-orange-700 mb-4 flex items-center gap-2.5 border-b border-stone-200 pb-3">
+                    <i class="fa-solid fa-file-shield text-orange-600 text-base sm:text-xl"></i>
+                    <span>说明与约定</span>
+                </h3>
+                <ul class="space-y-3 text-sm sm:text-base text-stone-600">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-orange-600 font-bold">•</span>
+                        <span>本服务为GEO策略、内容与渠道布局服务。</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-orange-600 font-bold">•</span>
+                        <span>官网改造、功能开发、付费媒体投放等费用另行核算，可协助执行。</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-orange-600 font-bold">•</span>
+                        <span>GEO优化提升的是品牌被AI引用和推荐的概率，不承诺固定排名；以约定的执行交付及阶段性可见度提升指标作为验收依据。</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-orange-600 font-bold">•</span>
+                        <span>所有内容需经客户确认后发布。</span>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- FOOTER HIGHLIGHTS (4 BOTTOM ITEMS) -->
+        <footer class="pt-6 sm:pt-8 border-t border-orange-200">
+            <div class="mobile-stack-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 text-center">
+                
+                <div class="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-stone-200">
+                    <i class="fa-solid fa-eye text-orange-600 text-sm sm:text-base shrink-0"></i>
+                    <div class="text-left">
+                        <div class="text-xs sm:text-sm font-bold text-stone-900">提升品牌</div>
+                        <div class="text-[10px] sm:text-xs text-orange-600/80 font-medium">AI 可见度</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-stone-200">
+                    <i class="fa-solid fa-filter-circle-dollar text-orange-600 text-sm sm:text-base shrink-0"></i>
+                    <div class="text-left">
+                        <div class="text-xs sm:text-sm font-bold text-stone-900">拦截竞品</div>
+                        <div class="text-[10px] sm:text-xs text-orange-600/80 font-medium">获取精准流量</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-stone-200">
+                    <i class="fa-solid fa-award text-orange-600 text-sm sm:text-base shrink-0"></i>
+                    <div class="text-left">
+                        <div class="text-xs sm:text-sm font-bold text-stone-900">建立权威</div>
+                        <div class="text-[10px] sm:text-xs text-orange-600/80 font-medium">提升信任背书</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center gap-3 p-3 sm:p-4 rounded-xl bg-white/88 border border-stone-200">
+                    <i class="fa-solid fa-chess-king text-orange-600 text-sm sm:text-base shrink-0"></i>
+                    <div class="text-left">
+                        <div class="text-xs sm:text-sm font-bold text-stone-900">长期占位</div>
+                        <div class="text-[10px] sm:text-xs text-orange-600/80 font-medium">构建品牌护城河</div>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Interactive Consultation Modal -->
+    <div id="inquiryModal" class="fixed inset-0 bg-stone-900/25 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden mobile-fix-modal">
+        <div class="bg-white border border-orange-200 rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 class="text-xl font-bold text-orange-600 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-comments"></i> 预约GEO搜索优化咨询
+            </h3>
+            <p class="text-xs text-stone-500 mb-6">请填写您的品牌与联系方式，我们将在2小时内安排GEO专家与您对接。</p>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 mb-1">您的姓名 / 称呼 *</label>
+                    <input type="text" required placeholder="如：张经理" class="w-full bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-orange-600">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 mb-1">联系电话 / 微信 *</label>
+                    <input type="text" required placeholder="如：13800138000" class="w-full bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-orange-600">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 mb-1">意向套餐</label>
+                    <select class="w-full bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-orange-600">
+                        <option>可见度诊断包（¥19800）</option>
+                        <option selected>AI可见度增长包（¥58000）★主推</option>
+                        <option>品牌占位包（¥180000）</option>
+                        <option>未确定，需专家评估诊断</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 mb-1">品牌 / 业务名称</label>
+                    <input type="text" placeholder="如：某某科技 / 某某品牌" class="w-full bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-xs text-stone-900 focus:outline-none focus:border-orange-600">
+                </div>
+
+                <button type="submit" class="w-full py-2.5 gold-btn font-bold text-slate-950 rounded-lg text-sm mt-2">
+                    立即提交咨询
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-orange-600 text-slate-950 font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 text-sm transition transform translate-y-20 opacity-0 z-50 mobile-toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">提交成功！专家稍后与您联系。</span>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('inquiryModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('inquiryModal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeModal();
+            showToast('已收到您的预约请求，GEO策略师将尽快联系您！');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+
+</body>
+</html>
