@@ -5,19 +5,21 @@ rm -rf dist
 mkdir -p dist/server dist/.openai
 cp price.html dist/price.html
 
-cat > dist/server/index.js <<'EOF'
-import fs from 'node:fs/promises';
-
-const html = await fs.readFile(new URL('../price.html', import.meta.url), 'utf8');
+node <<'NODE'
+const fs = require('fs');
+const html = fs.readFileSync('price.html', 'utf8');
+const server = `const html = ${JSON.stringify(html)};
 
 export default {
   async fetch() {
     return new Response(html, {
-      headers: { 'content-type': 'text/html; charset=utf-8' },
+      headers: { 'content-type': 'text/html; charset=utf-8' }
     });
-  },
+  }
 };
-EOF
+`;
+fs.writeFileSync('dist/server/index.js', server);
+NODE
 
 cat > dist/.openai/hosting.json <<'EOF'
 {
