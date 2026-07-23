@@ -3,6 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist/server dist/.openai && cp price.html dist/price.html && node -e \"const fs=require('fs'); const path=require('path'); const server=String.raw`import fs from 'node:fs/promises';\\nconst html = await fs.readFile(new URL('../price.html', import.meta.url), 'utf8');\\nexport default {\\n  async fetch() {\\n    return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8' } });\\n  }\\n};\\n`; fs.writeFileSync(path.join('dist','server','index.js'), server); fs.writeFileSync(path.join('dist','.openai','hosting.json'), JSON.stringify({project_id:'appgprj_6a622156c42c819197b8bd631dcac730'},null,2));\""
+    "build": "bash build.sh"
   }
 }
